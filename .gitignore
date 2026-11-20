@@ -1,0 +1,31 @@
+# Dépôts séparés, hébergés à part
+/projets/
+
+# --- Sorties locales sensibles — ne pas committer
+private/
+
+# --- Secrets ---
+.env
+.env.*
+!.env.example
+*.secret
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+secrets/
+
+# --- OS / éditeurs ---
+.DS_Store
+.idea/
+.vscode/*.local
+*.swp
+node_modules/
+
+# Dépôts modèles (hébergés à part sur GitHub)
+modeles/
+
+# Vérification locale des modèles Python (scripts/verifier-modele.mjs)
+.venv-verification/

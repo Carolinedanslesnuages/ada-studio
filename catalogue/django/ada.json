@@ -1,0 +1,39 @@
+{
+  "type": "gestion",
+  "edition": "studio",
+  "personnaliser": [
+    "PROJET.md",
+    "README.md",
+    "AGENTS.md",
+    "docs/adr/0001-choix-de-la-stack.md",
+    "docs/adr/README.md",
+    "pyproject.toml",
+    "projet/__init__.py",
+    "projet/settings.py",
+    "projet/urls.py",
+    "gestion/templates/gestion/accueil.html"
+  ],
+  "controlesRequis": [
+    "Anti-fuite (gitleaks)",
+    "Application (lint, types, tests)",
+    "Titre de PR (Conventional Commits, semver)",
+    "Taille des fichiers (une responsabilité par fichier)"
+  ],
+  "controles": [
+    "cd /app && ruff check . && ruff format --check . && mypy && python manage.py makemigrations --check --dry-run && python manage.py test"
+  ],
+  "apercu": {
+    "image": "python:3.13-slim",
+    "base": "postgres",
+    "npm": [],
+    "pip": [
+      "."
+    ],
+    "avant": [
+      "cd /app && python manage.py migrate --noinput && python manage.py compte_apercu"
+    ],
+    "arrierePlan": [],
+    "principal": "cd /app && python manage.py runserver 0.0.0.0:8000",
+    "port": 8000
+  }
+}

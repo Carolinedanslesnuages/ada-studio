@@ -1,0 +1,33 @@
+name: traitement
+
+# Exécution planifiée du traitement : chaque lundi à 6 h (UTC), ou à la demande (onglet Actions →
+# traitement → Run workflow). Le fichier nettoyé et le rapport sont joints à l'exécution
+# (« Artifacts »), conservés 30 jours. Pour changer la fréquence : demander à un développeur.
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  traitement:
+    name: Traitement planifié
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+      - run: python -m traitement
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: resultat-du-traitement
+          path: |
+            rapport/
+            donnees/sortie/
+          retention-days: 30

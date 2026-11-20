@@ -1,0 +1,6 @@
+{
+  "devDependencies": { "tailwindcss-primeui": "0.6.1" },
+  "regles": [
+    "PrimeVue avec Tailwind : les utilitaires Tailwind servent à la mise en page ; les couleurs de PrimeVue sont aussi disponibles en classes (bg-primary, text-muted-color… par tailwindcss-primeui)."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "dependencies": { "vuetify": "3.13.7", "@mdi/font": "7.4.47" },
+  "devDependencies": { "vite-plugin-vuetify": "2.1.3" },
+  "regles": [
+    "Vuetify 3 : composants V* (VBtn, VTextField, VSelect, VDialog, VDataTable…) importés automatiquement ; couleurs du thème « projet » (src/interface/composants.ts), reliées aux jetons --app-*. Ne pas changer les couleurs ailleurs.",
+    "Icônes : Material Design Icons (« mdi-<nom> »), toujours avec un texte visible ou une étiquette."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "titre": "__NOM_PROJET__",
+  "introduction": "Testez vos connaissances en quelques questions. Après chaque réponse, vous voyez la correction et son explication.",
+  "seuilReussite": 60,
+  "questions": [
+    {
+      "id": "accessibilite-image",
+      "enonce": "Une image qui transmet une information doit avoir…",
+      "type": "unique",
+      "choix": [
+        { "id": "a", "texte": "Une alternative textuelle qui donne cette information" },
+        { "id": "b", "texte": "Une alternative vide (alt=\"\")" },
+        { "id": "c", "texte": "Rien : l'image suffit" }
+      ],
+      "bonnes": ["a"],
+      "explication": "Une image porteuse d'information a une alternative qui dit la même chose ; une image décorative a une alternative vide (RGAA, thème 1)."
+    },
+    {
+      "id": "accessibilite-couleur",
+      "enonce": "Pour signaler une erreur dans un formulaire, il faut…",
+      "type": "multiple",
+      "choix": [
+        { "id": "a", "texte": "Un message écrit qui explique l'erreur" },
+        { "id": "b", "texte": "Seulement une bordure rouge" },
+        { "id": "c", "texte": "Relier le message au champ concerné" }
+      ],
+      "bonnes": ["a", "c"],
+      "explication": "L'information ne passe jamais par la couleur seule : un message clair, relié au champ, est lu par tous, y compris avec un lecteur d'écran."
+    },
+    {
+      "id": "accessibilite-clavier",
+      "enonce": "Tout ce qui se fait à la souris doit aussi pouvoir se faire au clavier.",
+      "type": "unique",
+      "choix": [
+        { "id": "vrai", "texte": "Vrai" },
+        { "id": "faux", "texte": "Faux" }
+      ],
+      "bonnes": ["vrai"],
+      "explication": "C'est une règle de base du RGAA (thème 12) : certaines personnes n'utilisent que le clavier."
+    }
+  ]
+}

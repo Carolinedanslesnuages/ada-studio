@@ -1,0 +1,6 @@
+{
+  "files": [],
+  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.app.json" }, { "path": "./tsconfig.vitest.json" }],
+  // Alias lu par l'outil shadcn-vue (npx shadcn-vue add …) pour placer les composants copiés.
+  "compilerOptions": { "paths": { "@/*": ["./src/*"] } }
+}

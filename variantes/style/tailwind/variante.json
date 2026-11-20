@@ -1,0 +1,6 @@
+{
+  "devDependencies": { "tailwindcss": "4.3.4", "@tailwindcss/vite": "4.3.4" },
+  "regles": [
+    "Tailwind CSS 4 : classes utilitaires dans les gabarits ; couleurs du projet via les classes reliées aux jetons (bg-primaire, text-texte, border-bordure…, voir src/styles/principal.css) ; pas de couleur en dur."
+  ]
+}

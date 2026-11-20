@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "__NOM_PROJET__",
+  "short_name": "__NOM_PROJET__",
+  "version": "0.1.0",
+  "description": "__BASELINE__",
+  "action": {
+    "default_title": "__NOM_PROJET__",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "scripts": [
+      "background.js"
+    ],
+    "type": "module"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "__SLUG__@extensions.local",
+      "strict_min_version": "128.0"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "site",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "test:unit": "vitest",
+    "type-check": "nuxt typecheck",
+    "verifier:accessibilite": "node scripts/verifier-accessibilite.mjs",
+    "lint": "oxlint . && eslint .",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build -o storybook-static --quiet"
+  },
+  "dependencies": {
+    "nuxt": "4.6.4",
+    "vue": "^3.5.42"
+  },
+  "devDependencies": {
+    "@nuxt/test-utils": "4.3.4",
+    "@storybook/addon-a11y": "10.6.6",
+    "@storybook/addon-docs": "10.6.6",
+    "@storybook/vue3-vite": "10.6.6",
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^24.13.4",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitest/eslint-plugin": "^1.6.27",
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/test-utils": "^2.5.0",
+    "axe-core": "^4.14.1",
+    "eslint": "^10.10.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-oxlint": "~1.82.0",
+    "eslint-plugin-vue": "~10.11.0",
+    "eslint-plugin-vuejs-accessibility": "^2.6.3",
+    "globals": "^17.14.0",
+    "jiti": "^2.7.0",
+    "jsdom": "^30.0.1",
+    "oxlint": "~1.82.0",
+    "prettier": "3.9.6",
+    "storybook": "10.6.6",
+    "typescript": "~6.0.0",
+    "vitest": "^4.1.11",
+    "vue-eslint-parser": "^10.4.1",
+    "vue-tsc": "^3.3.11"
+  },
+  "engines": {
+    "node": "^22.18.0 || >=24.12.0"
+  },
+  "license": "UNLICENSED"
+}

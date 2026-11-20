@@ -1,0 +1,16 @@
+/* Couleurs du projet appliquées au thème de VitePress (jetons --app-*, contrastes ≥ 4,5:1 sur blanc). */
+:root {
+  --vp-font-family-base: var(--app-police);
+  --vp-c-brand-1: var(--app-primaire);
+  --vp-c-brand-2: var(--app-primaire-survol);
+  --vp-c-brand-3: var(--app-primaire);
+  --vp-c-brand-soft: #ccfbf1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}

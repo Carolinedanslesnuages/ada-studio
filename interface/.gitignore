@@ -1,0 +1,35 @@
+node_modules/
+dist/
+.env
+coverage/
+.DS_Store
+*.tsbuildinfo
+
+# --- Sorties locales sensibles — ne pas committer
+private/
+
+# --- Secrets ---
+.env.*
+!.env.example
+*.secret
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+secrets/
+
+# --- Éditeurs ---
+.idea/
+.vscode/*.local
+*.swp
+
+# Aperçus : clones et conteneurs des projets (jamais dans git)
+apercus/
+
+# Sessions chiffrées (jamais dans git)
+sessions/
+
+# Registre des projets (créés, repris) : historique gardé même si un dépôt est supprimé
+registre/

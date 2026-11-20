@@ -1,0 +1,58 @@
+{
+  "skills": [
+    {
+      "name": "po-bug",
+      "files": [
+        "SKILL.md",
+        "agents/openai.yaml"
+      ]
+    },
+    {
+      "name": "po-projet-nouveau",
+      "files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/ci.md",
+        "references/interface.md",
+        "references/modeles-github/bug.yml",
+        "references/modeles-github/config.yml",
+        "references/modeles-github/pull_request_template.md",
+        "references/modeles-github/user-story.yml",
+        "references/release-please.md",
+        "references/securite.md",
+        "references/socle.md",
+        "references/stacks/README.md",
+        "references/stacks/django.md",
+        "references/stacks/nuxt.md",
+        "references/stacks/vue-fastapi.md",
+        "references/stacks/vue-nest.md",
+        "references/stacks/vue-node.md",
+        "references/stacks/vue-seul.md"
+      ]
+    },
+    {
+      "name": "po-story",
+      "files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/fiche-relecture.md",
+        "references/perimetre.md",
+        "references/rgaa-4.1.2/01-images.md",
+        "references/rgaa-4.1.2/02-cadres.md",
+        "references/rgaa-4.1.2/03-couleurs.md",
+        "references/rgaa-4.1.2/04-multimedia.md",
+        "references/rgaa-4.1.2/05-tableaux.md",
+        "references/rgaa-4.1.2/06-liens.md",
+        "references/rgaa-4.1.2/07-scripts.md",
+        "references/rgaa-4.1.2/08-elements-obligatoires.md",
+        "references/rgaa-4.1.2/09-structuration-de-l-information.md",
+        "references/rgaa-4.1.2/10-presentation-de-l-information.md",
+        "references/rgaa-4.1.2/11-formulaires.md",
+        "references/rgaa-4.1.2/12-navigation.md",
+        "references/rgaa-4.1.2/13-consultation.md",
+        "references/rgaa-4.1.2/README.md",
+        "references/rgaa.md"
+      ]
+    }
+  ]
+}

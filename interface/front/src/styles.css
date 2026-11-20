@@ -1,0 +1,227 @@
+/* Mise en page « atelier », façon Claude : barre latérale, demande au centre, aperçu en panneau. */
+.atelier {
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 62em) {
+  .atelier {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* La conversation, au centre, garde une largeur de lecture confortable. */
+.atelier__centre > * {
+  width: 100%;
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.atelier__colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+/* Grand écran : chaque colonne garde la hauteur de la fenêtre et défile seule ; la page ne
+   s'allonge plus avec la conversation. */
+@media (min-width: 62em) {
+  .atelier__colonne {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    height: calc(100vh - 2rem);
+    overflow-y: auto;
+    /* De quoi garder visibles les contours de focus au bord de la zone qui défile. */
+    padding: 0.25rem;
+  }
+
+  .atelier__barre {
+    border-right: 1px solid var(--app-bordure);
+    padding-right: 1rem;
+  }
+
+  /* Le cadre prend la place restante sous les boutons, sans déborder du panneau. */
+  .atelier__apercu .apercu--cadre,
+  .atelier__apercu .apercu {
+    min-height: 0;
+  }
+}
+
+.atelier__haut {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 1rem;
+  margin-bottom: -0.5rem;
+}
+
+.atelier__vide {
+  margin: 20vh auto 0;
+  color: var(--app-texte-doux);
+}
+
+.liste-stories {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.liste-stories li {
+  padding: 0;
+}
+
+.liste-stories button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--app-bordure);
+  background: none;
+  cursor: pointer;
+}
+
+.liste-stories button[aria-current='true'] {
+  background-color: var(--app-fond-primaire);
+  box-shadow: inset 4px 0 0 var(--app-primaire);
+}
+
+.fil {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fil li {
+  padding: 0.75rem 1rem;
+  background-color: var(--app-fond-doux);
+  border-radius: 0.25rem;
+  white-space: pre-wrap;
+}
+
+.apercu {
+  flex: 1;
+  border: 1px dashed var(--app-bordure);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 24rem;
+}
+
+.fil-pre {
+  white-space: pre-wrap;
+}
+
+.apercu--cadre {
+  width: 100%;
+  min-height: 70vh;
+  border: 1px solid var(--app-bordure);
+  padding: 0;
+  background: var(--app-fond);
+}
+
+.journal {
+  max-height: 12rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.activite__journal {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0;
+  border-left: 2px solid var(--app-primaire);
+  padding-left: 0.75rem;
+}
+
+.activite__journal li {
+  padding: 0.1rem 0;
+}
+
+.activite__icone {
+  display: inline-block;
+  animation: tourner 1.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activite__icone {
+    animation: none;
+  }
+}
+
+@keyframes tourner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fil__assistant {
+  border-left: 4px solid var(--app-primaire);
+}
+
+.controles {
+  list-style: none;
+  padding-left: 0;
+}
+
+.controle--ok {
+  color: var(--app-succes);
+}
+
+.controle--ko {
+  color: var(--app-erreur);
+}
+
+.versions {
+  padding: 0.75rem 1rem;
+  background-color: var(--app-fond-doux);
+}
+
+/* Pas de marqueur de numérotation pour le fil et le journal. */
+.fil li::marker,
+.activite__journal li::marker {
+  content: none;
+}
+
+/* Onglets de l'aperçu : le produit, ou ses composants (Storybook du projet). */
+.onglets {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--app-bordure);
+}
+
+.onglets__onglet {
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--app-texte);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.onglets__onglet[aria-selected='true'] {
+  border-bottom-color: var(--app-primaire);
+  color: var(--app-primaire);
+}
+
+/* Chaque panneau d'onglet prend la place restante, comme le cadre de l'aperçu avant lui. */
+.onglets__panneau {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+}

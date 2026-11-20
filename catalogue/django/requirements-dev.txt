@@ -1,0 +1,6 @@
+# Outils de développement : lint, types (comprend les dépendances de l'application).
+# Les tests utilisent l'outil intégré de Django (python manage.py test).
+-r requirements.txt
+ruff==0.17.3
+mypy==2.4.1
+django-stubs==6.1.2

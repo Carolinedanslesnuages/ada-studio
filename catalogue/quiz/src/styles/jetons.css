@@ -1,0 +1,24 @@
+/*
+ * Jetons de l'apparence du projet (--app-*) : couleurs, police, rayons, focus.
+ * Contrastes vérifiés : texte ≥ 4,5:1 sur son fond, bordures de champ ≥ 3:1.
+ * Changer l'apparence = changer ces valeurs, pas les composants.
+ */
+:root {
+  --app-texte: #1f2328;
+  --app-texte-doux: #57606a;
+  --app-fond: #ffffff;
+  --app-fond-doux: #f6f7f9;
+  --app-primaire: #0f766e;
+  --app-primaire-survol: #115e59;
+  --app-sur-primaire: #ffffff;
+  --app-bordure: #d0d7de;
+  --app-bordure-champ: #6e7781;
+  --app-erreur: #b42318;
+  --app-fond-erreur: #fef3f2;
+  --app-succes: #1a7f37;
+  --app-desactive: #8c959f;
+  --app-rayon: 0.5rem;
+  --app-police: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --app-focus: 0 0 0 2px #ffffff, 0 0 0 4px #7c3aed;
+  --app-ombre: 0 1px 2px rgb(31 35 40 / 8%), 0 8px 24px rgb(31 35 40 / 8%);
+}

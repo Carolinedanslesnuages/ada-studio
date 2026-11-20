@@ -1,0 +1,2 @@
+# Dépendances du traitement (versions figées ; mises à jour par une PR dédiée).
+# Aucune pour l'exemple : la bibliothèque standard de Python suffit (csv, html, pathlib).

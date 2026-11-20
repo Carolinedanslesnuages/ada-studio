@@ -1,0 +1,24 @@
+name: release-please
+
+# Versions par release-please (PR de version, notes de version, tag et release GitHub), épinglé à
+# une version ET à son SHA. La personne publie depuis le panneau « Versions » d'ADA studio, qui
+# fusionne la PR de version : pas de fusion automatique ici. La PR de version est ouverte avec le
+# jeton du dépôt (GITHUB_TOKEN).
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

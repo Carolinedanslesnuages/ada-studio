@@ -1,0 +1,163 @@
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  skills:
+    name: Skills conformes (invariants agent-skills)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+      - name: Conformité des SKILL.md
+        run: node scripts/verifier-skills.mjs
+      - name: Catalogues index.json à jour (node scripts/skills-index.mjs pour les régénérer)
+        run: node scripts/skills-index.mjs --check
+      - name: Référentiel RGAA à jour (node scripts/rgaa-generer.mjs pour le régénérer)
+        run: |
+          node scripts/rgaa-generer.mjs ressources/rgaa/4.1.2/criteres.json "$RUNNER_TEMP/rgaa" 4.1.2
+          diff -r "$RUNNER_TEMP/rgaa" skills/po/po-story/references/rgaa-4.1.2
+      - name: Versions par release-please, épinglé à un SHA, identique dans ADA studio et chaque modèle
+        run: |
+          grep -Eq 'uses: googleapis/release-please-action@[0-9a-f]{40} # v[0-9.]+$' .github/workflows/release-please.yml
+          for modele in catalogue/*/; do
+            diff -u .github/workflows/release-please.yml "$modele.github/workflows/release-please.yml"
+          done
+      - name: Contrôle « un fichier, une responsabilité » identique dans ADA et chaque modèle
+        run: |
+          for modele in catalogue/*/; do
+            diff -u .github/workflows/taille-fichiers.yml "$modele.github/workflows/taille-fichiers.yml"
+            grep -q '"Taille des fichiers (une responsabilité par fichier)"' "$modele/ada.json" || { echo "contrôle non exigé dans $modele/ada.json"; exit 1; }
+          done
+      - name: Liens .claude/skills et .agents/skills vers chaque skill
+        run: |
+          for s in skills/po/*/; do
+            n=$(basename "$s")
+            test -f ".claude/skills/$n/SKILL.md" || { echo "lien manquant .claude/skills/$n"; exit 1; }
+            test -f ".agents/skills/$n/SKILL.md" || { echo "lien manquant .agents/skills/$n"; exit 1; }
+          done
+
+  edition:
+    name: Édition studio, licence et identité neutre
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+      - name: Fichier EDITION = studio
+        run: test "$(cat EDITION)" = studio
+      - name: Licence propriétaire présente
+        run: grep -q 'Tous droits réservés' LICENSE
+      - name: Chaque package.json est « UNLICENSED » et « private »
+        run: |
+          git ls-files '*package.json' | while read -r paquet; do
+            node -e 'const p = require(process.argv[1]); if (p.license !== "UNLICENSED" || p.private !== true) { console.error(`${process.argv[1]} : license ${p.license}, private ${p.private}`); process.exit(1) }' "./$paquet"
+          done
+      - name: Aucune identité de l'État (hors règle « ne jamais imiter » et sources officielles du RGAA)
+        run: |
+          if git grep -niE 'dsfr|marianne|gouvfr|gouvminint|république française|#000091|#e1000f|dnum|fabnum' -- . ':!.github/workflows/check.yml' \
+            | grep -vE "accessibilite\.numerique\.gouv\.fr|d'un site officiel de l'État \(Marianne"; then
+            echo "Mention interdite ci-dessus"; exit 1
+          fi
+      - name: Licences des dépendances (aucune ne doit imposer de publier le code)
+        run: node scripts/licences.mjs --check && git diff --exit-code docs/licences-dependances.md
+      - name: Variantes (application, combinaisons interdites refusées)
+        run: node --test scripts/variantes.test.mjs
+
+  images:
+    name: Image et chart du modèle ${{ matrix.modele }} (construction, démarrage, helm lint)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        modele: [vue-node, formulaire]
+    defaults:
+      run:
+        working-directory: catalogue/${{ matrix.modele }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Image de production
+        run: docker build -t modele .
+      - name: L'image démarre et répond
+        run: |
+          docker run -d --name modele -p 8080:8080 modele
+          for _ in $(seq 1 30); do curl -sf http://localhost:8080/api && exit 0; sleep 1; done
+          docker logs modele; exit 1
+      - name: Chart Helm, personnalisé comme à la création d'un projet
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/helm.tgz" https://get.helm.sh/helm-v4.2.3-linux-amd64.tar.gz
+          echo "e9b88b4ee95b18c706839c28d3a0220e5bc470e9cd9262410c90793c45ff8b7c  $RUNNER_TEMP/helm.tgz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/helm.tgz" -C "$RUNNER_TEMP" linux-amd64/helm
+          cp -R charts/app "$RUNNER_TEMP/app"
+          sed -i 's/__SLUG__/projet-essai/g; s/__NOM_PROJET__/Projet essai/g' "$RUNNER_TEMP/app/Chart.yaml" "$RUNNER_TEMP/app/values.yaml"
+          "$RUNNER_TEMP/linux-amd64/helm" lint --strict "$RUNNER_TEMP/app"
+          "$RUNNER_TEMP/linux-amd64/helm" template essai "$RUNNER_TEMP/app" --set ingress.enabled=true --set ingress.host=exemple.fr > /dev/null
+
+  modeles:
+    name: Modèle ${{ matrix.modele }} (installation, lint, types, tests, compilation)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        modele: [vue-nest, vue-node, vue-fastapi, formulaire, tableau-de-bord, api-nest, api-fastapi, traitement-python, django, vitepress, nuxt, carte, quiz, composant, pwa, extension, maquette]
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+      - name: Contrôles déclarés par catalogue/${{ matrix.modele }}/ada.json (et Storybook)
+        run: node scripts/verifier-modele.mjs "${{ matrix.modele }}"
+
+  variantes:
+    name: Variante vue-nest ${{ matrix.style }} + ${{ matrix.composants }} (lint, types, tests dont accessibilité et stories, compilation, Storybook)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Le modèle de référence dans toutes les combinaisons autorisées (css-maison + aucune : job « modeles »).
+        include:
+          - { style: css-maison, composants: reka-ui }
+          - { style: css-maison, composants: primevue }
+          - { style: css-maison, composants: vuetify }
+          - { style: css-maison, composants: naive-ui }
+          - { style: tailwind, composants: aucune }
+          - { style: tailwind, composants: reka-ui }
+          - { style: tailwind, composants: shadcn-vue }
+          - { style: tailwind, composants: primevue }
+          - { style: tailwind, composants: naive-ui }
+          - { style: unocss, composants: aucune }
+          - { style: unocss, composants: reka-ui }
+          - { style: unocss, composants: naive-ui }
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+      - name: Variante appliquée puis vérifiée comme un projet créé
+        run: node scripts/verifier-modele.mjs vue-nest --style "${{ matrix.style }}" --composants "${{ matrix.composants }}"
+
+  secrets:
+    name: Anti-fuite (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: gitleaks 8.30.1 (binaire vérifié)
+        run: |
+          curl -sSfL -o gitleaks.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gitleaks.tgz" | sha256sum -c -
+          tar -xzf gitleaks.tgz gitleaks
+          ./gitleaks git --redact --verbose .

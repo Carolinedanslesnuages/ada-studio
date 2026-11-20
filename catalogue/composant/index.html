@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>__NOM_PROJET__ — démonstration du composant</title>
+    <style>
+      body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; color: #1e1e1e; margin: 0; }
+      main { max-width: 48rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+      pre { background: #f6f6f6; border: 1px solid #ddd; padding: 1rem; overflow-x: auto; }
+      code { font-size: 0.875rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>__NOM_PROJET__</h1>
+      <p>Page de démonstration : le composant ci-dessous est intégré comme dans n’importe quel site.</p>
+
+      <composant-__SLUG__
+        titre="__NOM_PROJET__"
+        libelle="Rechercher une ville"
+        elements='["Bordeaux","Lille","Lyon","Marseille","Nantes","Rennes","Strasbourg","Toulouse"]'
+      ></composant-__SLUG__>
+      <p id="dernier-choix" aria-live="polite">Aucun choix pour l’instant.</p>
+
+      <h2>L’intégrer dans une page</h2>
+      <pre><code>&lt;script type="module" src="https://adresse-du-composant/composant.js"&gt;&lt;/script&gt;
+
+&lt;composant-__SLUG__
+  libelle="Rechercher une ville"
+  elements='["Lille","Lyon","Nantes"]'
+&gt;&lt;/composant-__SLUG__&gt;</code></pre>
+      <p>La page hôte peut suivre les choix (événement <code>choix</code>) et ajuster les couleurs :</p>
+      <pre><code>document.querySelector('composant-__SLUG__')
+  .addEventListener('choix', (evenement) =&gt; console.log(evenement.detail[0]))
+
+composant-__SLUG__ { --composant-accent: #0f766e; }</code></pre>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module">
+      document.querySelector('composant-__SLUG__').addEventListener('choix', (evenement) => {
+        document.getElementById('dernier-choix').textContent = `Dernier choix reçu par la page : ${evenement.detail[0]}`
+      })
+    </script>
+  </body>
+</html>

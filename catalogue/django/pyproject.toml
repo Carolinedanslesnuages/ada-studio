@@ -1,0 +1,25 @@
+[project]
+name = "__SLUG__"
+version = "0.1.0"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+extend-exclude = ["gestion/migrations"]
+
+[tool.ruff.lint]
+# Erreurs, style, imports, bonnes pratiques, simplifications, noms (pep8-naming), sécurité de base.
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "N", "S", "RUF"]
+ignore = ["S101"]  # assert : autorisé dans les tests
+# Typographie française voulue (apostrophe, guillemets, espaces insécables).
+allowed-confusables = ["’", "«", "»", " ", " "]
+
+[tool.mypy]
+strict = true
+files = ["projet", "gestion", "manage.py"]
+exclude = ["gestion/migrations/"]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "projet.settings"

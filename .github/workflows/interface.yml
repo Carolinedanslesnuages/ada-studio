@@ -1,0 +1,57 @@
+name: interface
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: interface-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  api:
+    name: Interface — API (lint, tests, compilation)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: interface/api
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: interface/api/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run test:e2e
+      - run: npm run build
+
+  front:
+    name: Interface — Front (lint, types, tests dont accessibilité, compilation)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: interface/front
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: interface/front/package-lock.json
+      - run: npm ci
+      - run: npx oxlint .
+      - run: npx eslint .
+      - run: npm run type-check
+      - run: npm run test:unit -- --run
+      - run: npm run build-only
+      - name: Icônes à jour (npm run icones pour les régénérer)
+        run: node scripts/icones.mjs --check
+      - name: Storybook de l'interface (stories testées par test:unit)
+        run: npm run build-storybook

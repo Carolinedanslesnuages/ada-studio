@@ -1,0 +1,37 @@
+{
+  "type": "traitement",
+  "edition": "studio",
+  "personnaliser": [
+    "PROJET.md",
+    "README.md",
+    "AGENTS.md",
+    "docs/adr/0001-choix-de-la-stack.md",
+    "docs/adr/README.md",
+    "pyproject.toml",
+    "traitement/__init__.py",
+    "traitement/__main__.py"
+  ],
+  "controlesRequis": [
+    "Anti-fuite (gitleaks)",
+    "Traitement (lint, types, tests)",
+    "Titre de PR (Conventional Commits, semver)",
+    "Taille des fichiers (une responsabilité par fichier)"
+  ],
+  "controles": [
+    "cd /app && ruff check . && ruff format --check . && mypy && pytest"
+  ],
+  "apercu": {
+    "image": "python:3.13-slim",
+    "base": null,
+    "npm": [],
+    "pip": [
+      "."
+    ],
+    "avant": [
+      "cd /app && python -m traitement"
+    ],
+    "arrierePlan": [],
+    "principal": "cd /app && python -m http.server 8000 --bind 0.0.0.0 --directory rapport",
+    "port": 8000
+  }
+}

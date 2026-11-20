@@ -1,0 +1,122 @@
+/* Icônes d'ADA studio : Remix Icon (licence Apache 2.0), affichées par masque CSS dans la couleur du texte.
+ * Fichier GÉNÉRÉ par scripts/icones.mjs à partir des icônes utilisées dans l’interface. */
+.icone {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: -0.25em;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+.icone.icone--sm {
+  width: 1em;
+  height: 1em;
+}
+.icone.icone-add-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/add-line.svg');
+}
+.icone.icone-alert-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/alert-line.svg');
+}
+.icone.icone-arrow-down-s-line {
+  mask-image: url('../../node_modules/remixicon/icons/Arrows/arrow-down-s-line.svg');
+}
+.icone.icone-arrow-left-line {
+  mask-image: url('../../node_modules/remixicon/icons/Arrows/arrow-left-line.svg');
+}
+.icone.icone-arrow-up-s-line {
+  mask-image: url('../../node_modules/remixicon/icons/Arrows/arrow-up-s-line.svg');
+}
+.icone.icone-check-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/check-line.svg');
+}
+.icone.icone-checkbox-circle-fill {
+  mask-image: url('../../node_modules/remixicon/icons/System/checkbox-circle-fill.svg');
+}
+.icone.icone-checkbox-circle-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/checkbox-circle-line.svg');
+}
+.icone.icone-close-circle-fill {
+  mask-image: url('../../node_modules/remixicon/icons/System/close-circle-fill.svg');
+}
+.icone.icone-close-circle-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/close-circle-line.svg');
+}
+.icone.icone-download-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/download-line.svg');
+}
+.icone.icone-edit-line {
+  mask-image: url('../../node_modules/remixicon/icons/Design/edit-line.svg');
+}
+.icone.icone-error-warning-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/error-warning-line.svg');
+}
+.icone.icone-external-link-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/external-link-line.svg');
+}
+.icone.icone-eye-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/eye-line.svg');
+}
+.icone.icone-eye-off-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/eye-off-line.svg');
+}
+.icone.icone-folder-2-line {
+  mask-image: url('../../node_modules/remixicon/icons/Document/folder-2-line.svg');
+}
+.icone.icone-fullscreen-line {
+  mask-image: url('../../node_modules/remixicon/icons/Media/fullscreen-line.svg');
+}
+.icone.icone-git-pull-request-line {
+  mask-image: url('../../node_modules/remixicon/icons/Development/git-pull-request-line.svg');
+}
+.icone.icone-github-fill {
+  mask-image: url('../../node_modules/remixicon/icons/Logos/github-fill.svg');
+}
+.icone.icone-information-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/information-line.svg');
+}
+.icone.icone-leaf-line {
+  mask-image: url('../../node_modules/remixicon/icons/Others/leaf-line.svg');
+}
+.icone.icone-line-chart-line {
+  mask-image: url('../../node_modules/remixicon/icons/Business/line-chart-line.svg');
+}
+.icone.icone-links-line {
+  mask-image: url('../../node_modules/remixicon/icons/Business/links-line.svg');
+}
+.icone.icone-list-ordered {
+  mask-image: url('../../node_modules/remixicon/icons/Editor/list-ordered.svg');
+}
+.icone.icone-lock-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/lock-line.svg');
+}
+.icone.icone-logout-box-r-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/logout-box-r-line.svg');
+}
+.icone.icone-mic-line {
+  mask-image: url('../../node_modules/remixicon/icons/Media/mic-line.svg');
+}
+.icone.icone-play-line {
+  mask-image: url('../../node_modules/remixicon/icons/Media/play-line.svg');
+}
+.icone.icone-refresh-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/refresh-line.svg');
+}
+.icone.icone-send-plane-fill {
+  mask-image: url('../../node_modules/remixicon/icons/Business/send-plane-fill.svg');
+}
+.icone.icone-stop-circle-line {
+  mask-image: url('../../node_modules/remixicon/icons/Media/stop-circle-line.svg');
+}
+.icone.icone-time-line {
+  mask-image: url('../../node_modules/remixicon/icons/System/time-line.svg');
+}
+.icone.icone-user-add-line {
+  mask-image: url('../../node_modules/remixicon/icons/User & Faces/user-add-line.svg');
+}
+.icone.icone-user-line {
+  mask-image: url('../../node_modules/remixicon/icons/User & Faces/user-line.svg');
+}

@@ -1,0 +1,77 @@
+/* Tailwind CSS 4, animations de shadcn-vue, puis les jetons et la base communs du projet. */
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './jetons.css';
+@import './base.css';
+
+/* Couleurs du projet (jetons --app-*) : bg-primaire, text-texte-doux, rounded-app… */
+@theme inline {
+  --color-primaire: var(--app-primaire);
+  --color-primaire-survol: var(--app-primaire-survol);
+  --color-sur-primaire: var(--app-sur-primaire);
+  --color-texte: var(--app-texte);
+  --color-texte-doux: var(--app-texte-doux);
+  --color-fond: var(--app-fond);
+  --color-fond-doux: var(--app-fond-doux);
+  --color-bordure: var(--app-bordure);
+  --color-erreur: var(--app-erreur);
+  --color-succes: var(--app-succes);
+  --radius-app: var(--app-rayon);
+  --font-app: var(--app-police);
+  --font-sans: var(--app-police);
+
+  /* Jetons attendus par les composants shadcn-vue, reliés à ceux du projet. */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  --radius: var(--app-rayon);
+  --background: var(--app-fond);
+  --foreground: var(--app-texte);
+  --card: var(--app-fond);
+  --card-foreground: var(--app-texte);
+  --popover: var(--app-fond);
+  --popover-foreground: var(--app-texte);
+  --primary: var(--app-primaire);
+  --primary-foreground: var(--app-sur-primaire);
+  --secondary: var(--app-fond-doux);
+  --secondary-foreground: var(--app-texte);
+  --muted: var(--app-fond-doux);
+  --muted-foreground: var(--app-texte-doux);
+  --accent: var(--app-fond-doux);
+  --accent-foreground: var(--app-texte);
+  --destructive: var(--app-erreur);
+  --border: var(--app-bordure);
+  --input: var(--app-bordure-champ);
+  --ring: #7c3aed;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

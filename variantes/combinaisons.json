@@ -1,0 +1,93 @@
+{
+  "parDefaut": {
+    "style": "css-maison",
+    "composants": "aucune"
+  },
+  "styles": [
+    {
+      "valeur": "css-maison",
+      "nom": "CSS maison",
+      "pourQui": "Contrôle total, aucune dépendance",
+      "doc": "https://developer.mozilla.org/fr/docs/Web/CSS",
+      "libelleDoc": "Les bases du CSS (MDN)"
+    },
+    {
+      "valeur": "tailwind",
+      "nom": "Tailwind CSS",
+      "pourQui": "Classes utilitaires, très répandu",
+      "doc": "https://tailwindcss.com/docs"
+    },
+    {
+      "valeur": "unocss",
+      "nom": "UnoCSS",
+      "pourQui": "Comme Tailwind, plus léger",
+      "doc": "https://unocss.dev/guide/"
+    }
+  ],
+  "composants": [
+    {
+      "valeur": "aucune",
+      "nom": "Aucune bibliothèque",
+      "pourQui": "Projets simples, apprentissage",
+      "doc": "https://vuejs.org/guide/essentials/component-basics.html",
+      "libelleDoc": "Écrire ses composants (documentation de Vue)"
+    },
+    {
+      "valeur": "reka-ui",
+      "nom": "Reka UI",
+      "pourQui": "Garder son propre style avec des composants accessibles prêts",
+      "doc": "https://reka-ui.com/docs/overview/getting-started"
+    },
+    {
+      "valeur": "shadcn-vue",
+      "nom": "shadcn-vue",
+      "pourQui": "Composants modernes et modifiables",
+      "doc": "https://www.shadcn-vue.com/docs/introduction"
+    },
+    {
+      "valeur": "primevue",
+      "nom": "PrimeVue",
+      "pourQui": "Applications de gestion : tableaux, formulaires, dialogues",
+      "doc": "https://primevue.org/"
+    },
+    {
+      "valeur": "vuetify",
+      "nom": "Vuetify",
+      "pourQui": "Composants complets, style Material",
+      "doc": "https://vuetifyjs.com/"
+    },
+    {
+      "valeur": "naive-ui",
+      "nom": "Naive UI",
+      "pourQui": "Tableaux de bord, thème par jetons en TypeScript",
+      "doc": "https://www.naiveui.com/"
+    }
+  ],
+  "interdites": [
+    {
+      "composants": "shadcn-vue",
+      "style": "css-maison",
+      "raison": "shadcn-vue est écrit avec Tailwind CSS : choisissez le style Tailwind."
+    },
+    {
+      "composants": "shadcn-vue",
+      "style": "unocss",
+      "raison": "shadcn-vue est écrit avec Tailwind CSS : choisissez le style Tailwind."
+    },
+    {
+      "composants": "primevue",
+      "style": "unocss",
+      "raison": "PrimeVue ne propose pas d'intégration avec UnoCSS : choisissez le CSS maison ou Tailwind."
+    },
+    {
+      "composants": "vuetify",
+      "style": "tailwind",
+      "raison": "Vuetify apporte ses propres styles, qui entrent en conflit avec Tailwind : choisissez le CSS maison."
+    },
+    {
+      "composants": "vuetify",
+      "style": "unocss",
+      "raison": "Vuetify apporte ses propres styles, qui entrent en conflit avec UnoCSS : choisissez le CSS maison."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "devDependencies": { "unocss": "66.12.0" },
+  "regles": [
+    "UnoCSS (preset Wind 4, mêmes classes que Tailwind) : classes utilitaires dans les gabarits ; couleurs du projet via les classes reliées aux jetons (bg-primaire, text-texte…, voir uno.config.ts) ; pas de couleur en dur."
+  ]
+}

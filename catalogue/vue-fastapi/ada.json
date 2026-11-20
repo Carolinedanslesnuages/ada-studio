@@ -1,0 +1,56 @@
+{
+  "type": "service",
+  "edition": "studio",
+  "style": "css-maison",
+  "composants": "aucune",
+  "interface": {
+    "dossier": "front",
+    "variantes": true
+  },
+  "personnaliser": [
+    "PROJET.md",
+    "README.md",
+    "AGENTS.md",
+    "docker-compose.yml",
+    "docs/adr/0001-choix-de-la-stack.md",
+    "docs/adr/README.md",
+    "api/pyproject.toml",
+    "api/app/__init__.py",
+    "api/app/main.py",
+    "api/app/config.py",
+    "api/tests/test_sante.py",
+    "front/index.html",
+    "front/src/App.vue",
+    "front/src/views/HomeView.vue",
+    "front/src/views/__tests__/HomeView.spec.ts"
+  ],
+  "controlesRequis": [
+    "Anti-fuite (gitleaks)",
+    "API (lint, types, tests)",
+    "Front (lint, types, tests dont accessibilité, compilation)",
+    "Titre de PR (Conventional Commits, semver)",
+    "Taille des fichiers (une responsabilité par fichier)"
+  ],
+  "controles": [
+    "cd /app/api && ruff check . && ruff format --check . && mypy app && pytest",
+    "cd /app/front && npx oxlint . && npx eslint . && npm run type-check && npm run test:unit -- --run && npm run build-only"
+  ],
+  "apercu": {
+    "image": "python:3.13-slim",
+    "base": "postgres",
+    "npm": [
+      "front"
+    ],
+    "pip": [
+      "api"
+    ],
+    "avant": [
+      "cd /app/api && alembic upgrade head"
+    ],
+    "arrierePlan": [
+      "cd /app/api && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    ],
+    "principal": "cd /app/front && npx vite --host 0.0.0.0 --port 5173 --strictPort",
+    "port": 5173
+  }
+}

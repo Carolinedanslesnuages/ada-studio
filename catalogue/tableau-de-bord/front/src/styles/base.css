@@ -1,0 +1,200 @@
+/* Base commune à tous les écrans : police, liens, focus visible, lien d'évitement, mouvement réduit. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--app-police);
+  line-height: 1.5;
+  color: var(--app-texte);
+  background: var(--app-fond);
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--app-primaire);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--app-focus);
+}
+
+.conteneur {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.visuellement-cache {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.lien-evitement {
+  position: absolute;
+  left: 1rem;
+  top: -10rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  background: var(--app-fond);
+  border-radius: var(--app-rayon);
+}
+
+.lien-evitement:focus {
+  top: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Messages : information, réussite, erreur (le titre dit la nature, pas seulement la couleur). */
+.alerte {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--app-primaire);
+  border-radius: var(--app-rayon);
+  background: var(--app-fond-doux);
+}
+
+.alerte--erreur {
+  border-left-color: var(--app-erreur);
+  background: var(--app-fond-erreur);
+}
+
+.alerte--succes {
+  border-left-color: var(--app-succes);
+}
+
+.alerte__titre {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.alerte > :last-child {
+  margin-bottom: 0;
+}
+
+/* Bandeau d'avertissement en haut de page. */
+.bandeau {
+  padding: 0.75rem 0;
+  background: var(--app-fond-doux);
+  border-bottom: 1px solid var(--app-bordure);
+  font-weight: 600;
+}
+
+/* Groupes de cases à cocher et de boutons radio. */
+.groupe-choix {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border: 0;
+}
+
+.groupe-choix legend {
+  margin-bottom: 0.5rem;
+  padding: 0;
+  font-weight: 600;
+}
+
+.groupe-choix--en-ligne .choix {
+  display: inline-flex;
+  margin-right: 1.5rem;
+}
+
+.choix {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.choix input {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.2rem;
+  accent-color: var(--app-primaire);
+}
+
+.aide {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--app-texte-doux);
+  font-size: 0.875rem;
+}
+
+.erreur-champ {
+  margin: 0.5rem 0 0;
+  color: var(--app-erreur);
+  font-weight: 600;
+}
+
+.liste-sobre {
+  padding: 0;
+  list-style: none;
+}
+
+.texte-petit {
+  font-size: 0.875rem;
+}
+
+/* Bloc dépliable (details/summary). */
+.depliable summary {
+  cursor: pointer;
+  color: var(--app-primaire);
+  font-weight: 600;
+}
+
+/* Champs écrits directement dans un écran (hors composants de src/components/ui/). */
+.etiquette {
+  display: block;
+  font-weight: 600;
+}
+
+.saisie {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--app-bordure-champ);
+  border-radius: var(--app-rayon);
+  font: inherit;
+  color: var(--app-texte);
+  background: var(--app-fond);
+}
+
+.saisie[aria-invalid='true'] {
+  border: 2px solid var(--app-erreur);
+  background: var(--app-fond-erreur);
+}
+
+textarea.saisie {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.lien-bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border: 2px solid var(--app-primaire);
+  border-radius: var(--app-rayon);
+  color: var(--app-primaire);
+  font-weight: 600;
+  text-decoration: none;
+}

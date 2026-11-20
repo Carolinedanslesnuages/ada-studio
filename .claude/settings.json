@@ -1,0 +1,68 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout -b:*)",
+      "Bash(git switch -c:*)",
+      "Bash(npm create vue@latest:*)",
+      "Bash(npx @nestjs/cli@latest new:*)",
+      "Bash(npx nuxi@latest init:*)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm pkg set:*)",
+      "Bash(npx prisma init:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx prisma validate:*)",
+      "Bash(python3 -m venv:*)",
+      "Bash(mkdir:*)",
+      "Bash(pre-commit install:*)",
+      "Bash(pre-commit run:*)",
+      "Bash(node scripts/verifier-skills.mjs:*)",
+      "Bash(node scripts/skills-index.mjs:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(npx prisma migrate:*)",
+      "Bash(npx prisma db:*)",
+      "Bash(docker:*)"
+    ],
+    "deny": [
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push origin main:*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Read(./**/.env)",
+      "Read(./**/.env.local)",
+      "Read(./**/.env.production)",
+      "Bash(git commit --no-verify:*)",
+      "Bash(git push --no-verify:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command // \"\"' | grep -qiE '(rm[[:space:]]+-[a-z]*r[a-z]*f[a-z]*[[:space:]]+(/|~|\\$HOME|\\.|\\*)([[:space:]]|$))|(git[[:space:]]+push([[:space:]].*)?[[:space:]](--force|-f)([[:space:]]|$))|(git[[:space:]]+reset[[:space:]]+--hard)|(git[[:space:]]+clean[[:space:]]+-[a-z]*f)|(git[[:space:]]+(checkout[[:space:]]+--|restore)[[:space:]]+\\.)|(--no-verify)|(drop[[:space:]]+(table|database))|(truncate[[:space:]]+table)|(kubectl[[:space:]]+delete[[:space:]]+(namespace|ns)[[:space:]])|(kubectl[[:space:]]+delete[[:space:]].*--all)|(helm[[:space:]]+uninstall)|(docker[[:space:]]+(system|volume)[[:space:]]+prune)' && { echo 'BLOCKED (destructive-guard) : commande destructrice ou irréversible. Expliquer à l utilisateur ce que fait la commande, proposer une alternative sûre (git stash, --force-with-lease, sauvegarde, dry-run) et le laisser la lancer lui-même s il le décide.' >&2; exit 2; } || exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "api",
+  "edition": "studio",
+  "personnaliser": [
+    "PROJET.md",
+    "README.md",
+    "AGENTS.md",
+    "api/README.md",
+    "docker-compose.yml",
+    "docs/adr/0001-choix-de-la-stack.md",
+    "docs/adr/README.md",
+    "api/src/configurer-app.ts",
+    "api/test/app.e2e-spec.ts"
+  ],
+  "controlesRequis": [
+    "Anti-fuite (gitleaks)",
+    "API (lint, tests, compilation)",
+    "Titre de PR (Conventional Commits, semver)",
+    "Taille des fichiers (une responsabilité par fichier)"
+  ],
+  "controles": [
+    "cd /app/api && npm run lint && npm test && npm run test:e2e && npm run build"
+  ],
+  "apercu": {
+    "image": "node:24-bookworm",
+    "base": "postgres",
+    "npm": [
+      "api"
+    ],
+    "avant": [
+      "cd /app/api && if [ -d prisma/migrations ]; then npx prisma migrate deploy; fi"
+    ],
+    "arrierePlan": [],
+    "principal": "cd /app/api && npm run start:dev",
+    "port": 3000
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "folders": [{ "name": "ADA studio", "path": "." }],
+  "settings": {
+    "editor.minimap.enabled": false,
+    "workbench.startupEditor": "none",
+    "workbench.tips.enabled": false,
+    "breadcrumbs.enabled": false,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.venv": true,
+      "**/dist": true,
+      "**/.nuxt": true,
+      "**/.output": true,
+      "**/__pycache__": true,
+      "**/.git": true
+    }
+  },
+  "extensions": {
+    "recommendations": ["anthropic.claude-code"]
+  }
+}

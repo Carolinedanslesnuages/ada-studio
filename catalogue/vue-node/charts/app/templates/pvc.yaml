@@ -1,0 +1,19 @@
+{{- if .Values.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "app.nomComplet" . }}
+  labels:
+    {{- include "app.etiquettes" . | nindent 4 }}
+  annotations:
+    # Les données ne sont jamais supprimées avec l'application.
+    helm.sh/resource-policy: keep
+spec:
+  accessModes: ["ReadWriteOnce"]
+  {{- with .Values.persistence.storageClass }}
+  storageClassName: {{ . }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+{{- end }}

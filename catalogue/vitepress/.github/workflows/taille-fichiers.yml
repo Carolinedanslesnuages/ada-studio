@@ -1,0 +1,40 @@
+name: taille-fichiers
+
+# Un fichier, une responsabilité : un fichier de code ne dépasse pas 400 lignes non vides, un
+# fichier de test 600. Un fichier plus long venu d'avant (projet repris) est toléré tant qu'il ne
+# grossit pas : on le découpe quand on y travaille. Fichier identique dans ADA et chaque modèle.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  taille:
+    name: Taille des fichiers (une responsabilité par fichier)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: 400 lignes non vides par fichier de code, 600 par fichier de test
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          utiles() { grep -cv '^[[:space:]]*$' || true; }
+          echec=0
+          while IFS= read -r -d '' fichier; do
+            case "/$fichier" in
+              */migrations/*|*.d.ts|*.min.js) continue ;;
+              *.spec.*|*.test.*|*/tests/*|*/test/*|*/__tests__/*|*/test_*.py|*_test.py) max=600 ;;
+              *) max=400 ;;
+            esac
+            lignes=$(utiles < "$fichier")
+            [ "$lignes" -le "$max" ] && continue
+            avant=$(git show "$BASE:$fichier" 2>/dev/null | utiles)
+            if [ "${avant:-0}" -eq 0 ] || [ "$lignes" -gt "$avant" ]; then
+              echo "::error file=$fichier,title=Fichier trop long::$lignes lignes non vides (maximum $max). Découpez-le par responsabilité (pas une fonction par fichier) : chaque partie dans un fichier qui dit ce qu'elle fait."
+              echec=1
+            fi
+          done < <(git diff -z --name-only --diff-filter=AMR "$BASE" HEAD -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.mjs' '*.cjs' '*.mts' '*.cts' '*.vue' '*.py')
+          exit "$echec"

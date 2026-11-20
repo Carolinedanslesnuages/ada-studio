@@ -1,0 +1,5 @@
+{
+  "regles": [
+    "CSS maison : styles de chaque composant dans son bloc <style scoped>, avec les jetons --app-* ; aucun outil de style à ajouter."
+  ]
+}

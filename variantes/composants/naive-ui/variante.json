@@ -1,0 +1,7 @@
+{
+  "dependencies": { "naive-ui": "2.45.3" },
+  "regles": [
+    "Naive UI : importe chaque composant depuis « naive-ui » (NButton, NInput, NSelect, NDataTable, NModal…) ; thème par jetons TypeScript dans src/interface/theme-naive.ts, relié aux jetons --app-*. Ne change pas les couleurs ailleurs.",
+    "Étiquettes : une balise <label for> visible reliée au champ (input-props avec id), pas seulement le libellé de NFormItem."
+  ]
+}

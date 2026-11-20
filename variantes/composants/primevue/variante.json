@@ -1,0 +1,7 @@
+{
+  "dependencies": { "primevue": "4.5.5", "@primeuix/themes": "2.0.3", "primeicons": "7.0.0" },
+  "regles": [
+    "PrimeVue 4 (thème Aura, recalé sur les jetons --app-* dans src/interface/theme-primevue.ts) : importe chaque composant depuis « primevue/<nom> » (Button, InputText, Select, DataTable, Dialog…). Ne change pas les couleurs du thème ailleurs que dans ce fichier.",
+    "Icônes : primeicons (classe « pi pi-<nom> »), toujours avec aria-hidden=\"true\" et un texte visible ou une étiquette."
+  ]
+}

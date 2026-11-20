@@ -1,0 +1,5 @@
+{
+  "regles": [
+    "Aucune bibliothèque : les composants réutilisables sont écrits dans src/components/ui/ (voir BoutonAction, ChampSaisie, FenetreDialogue, TableauDonnees) ; réutilise-les avant d'en créer un."
+  ]
+}

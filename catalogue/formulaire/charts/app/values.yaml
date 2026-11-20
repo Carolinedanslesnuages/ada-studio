@@ -1,0 +1,59 @@
+# Valeurs par défaut. Les valeurs propres à un environnement (registre, adresse, taille du
+# stockage…) sont fournies par l'équipe qui déploie, hors de ce dépôt.
+
+image:
+  # Registre à définir par l'équipe infra (ex. ghcr.io/<organisation>/__SLUG__).
+  repository: __SLUG__
+  # Vide : appVersion du chart.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+# Base SQLite dans un fichier : une seule instance (voir docs/adr).
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  # Adresse publique, ex. __SLUG__.exemple.gouv.fr
+  host: ""
+  tls:
+    enabled: false
+    secretName: ""
+
+persistence:
+  # Fichier de la base (réponses, données saisies) : à conserver d'un redémarrage à l'autre.
+  enabled: true
+  size: 1Gi
+  storageClass: ""
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 256Mi
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: ["ALL"]
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
